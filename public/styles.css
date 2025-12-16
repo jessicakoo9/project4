@@ -54,7 +54,7 @@ button:hover {
 .item *,
 .footer *,
 .bottom * {
-  color: white;
+  color: black;
 }
 
 .item button {
