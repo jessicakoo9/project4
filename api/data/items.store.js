@@ -1,8 +1,8 @@
 import crypto from "crypto";
 
 let items = [
-  { id: crypto.randomUUID(), text: "Finish the REST API project 💗", mood: "🎀", done: false, createdAt: Date.now() },
-  { id: crypto.randomUUID(), text: "Deploy on Vercel like a boss 😌", mood: "✨", done: false, createdAt: Date.now() },
+  { id: crypto.randomUUID(), text: "Finish projects", mood: "🎀", done: false, createdAt: Date.now() },
+  { id: crypto.randomUUID(), text: "Deploy on vercel", mood: "✨", done: false, createdAt: Date.now() },
 ];
 
 export function listItems({ search = "", sort = "newest" } = {}) {
