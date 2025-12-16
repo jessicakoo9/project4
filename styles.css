@@ -1,0 +1,91 @@
+
+:root{
+  --bg1:#0f0b1a;
+  --bg2:#1b1032;
+  --pink:#ff4fd8;
+  --pink2:#ff87e9;
+  --soft:#d7c9ff;
+  --glass: rgba(255,255,255,.08);
+  --border: rgba(255,255,255,.14);
+}
+
+*{ font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(255,79,216,.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 30%, rgba(163,96,255,.22), transparent 55%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+  color:#fff;
+}
+
+.fw-black{ font-weight:900; }
+.text-soft{ color: var(--soft); }
+.border-soft{ border-color: var(--border)!important; }
+
+.glass{
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+
+.pill{
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: .6rem .8rem;
+}
+
+.btn-jess{
+  background: linear-gradient(135deg, var(--pink), var(--pink2));
+  border: 0;
+  color: #1a0c2d;
+  font-weight: 900;
+  box-shadow: 0 12px 30px rgba(255,79,216,.25);
+}
+.btn-jess:hover{ transform: translateY(-1px); }
+
+.item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 14px 14px;
+}
+
+.item .left{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.item .text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.item.done .text{
+  opacity:.65;
+  text-decoration: line-through;
+}
+
+.icon{
+  width: 34px;
+  height: 34px;
+  display:grid;
+  place-items:center;
+  border-radius: 12px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.toast-mini{
+  min-height: 22px;
+  font-size: .95rem;
+  color: var(--soft);
+}
