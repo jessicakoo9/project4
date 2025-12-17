@@ -1,38 +1,48 @@
 const statusEl = document.getElementById("status");
 const nameInput = document.getElementById("nameQuery");
+const minAgeInput = document.getElementById("minAge");
+const maxAgeInput = document.getElementById("maxAge");
+
+function render(model) {
+  const source = document.getElementById("results_template").innerHTML;
+  const template = Handlebars.compile(source);
+  document.getElementById("results").innerHTML = template(model);
+}
 
 async function checkHealth() {
   try {
     const res = await fetch("/api/health");
     const data = await res.json();
-    statusEl.textContent = data.ok ? "API: OK" : "API: not ok";
-  } catch (e) {
-    statusEl.textContent = "API: error";
+    statusEl.textContent = data.ok ? "API: OK ✅" : "API: not ok";
+  } catch {
+    statusEl.textContent = "API: error ❌";
   }
 }
 
-function render_view(model) {
-  const source = document.getElementById("show_results_view").innerHTML;
-  const template = Handlebars.compile(source);
-  document.getElementById("results").innerHTML = template(model);
-}
-
-async function updateView(button) {
-  const type = button.dataset.querytype;
-  let apiUrl = "/api";
-
-  if (type === "by_name") {
-    const q = nameInput.value.trim();
-    apiUrl = `/api/by_name/${encodeURIComponent(q || "")}`;
-  }
-
-  const res = await fetch(apiUrl);
+async function showAll() {
+  const res = await fetch("/api");
   const model = await res.json();
-  render_view(model);
+  render(model);
 }
 
-document.getElementById("queryByName").addEventListener("click", (e) => updateView(e.target));
-document.getElementById("showAll").addEventListener("click", (e) => updateView(e.target));
+async function search() {
+  const name = nameInput.value.trim();
+  const minAge = minAgeInput.value.trim();
+  const maxAge = maxAgeInput.value.trim();
+
+  const params = new URLSearchParams();
+  if (name) params.set("name", name);
+  if (minAge) params.set("minAge", minAge);
+  if (maxAge) params.set("maxAge", maxAge);
+
+  const url = `/api/search?${params.toString()}`;
+  const res = await fetch(url);
+  const model = await res.json();
+  render(model);
+}
+
+document.getElementById("searchBtn").addEventListener("click", search);
+document.getElementById("showAllBtn").addEventListener("click", showAll);
 
 checkHealth();
-updateView({ dataset: { querytype: "all" } });
+showAll();
