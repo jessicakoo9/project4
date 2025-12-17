@@ -4,39 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Employee Search</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </head>
+
 <body>
   <div class="container">
-    <h1>Employee Search</h1>
-    <p class="sub">Type a letter (or name) and see matching employees.</p>
+    <h1>Jessica’s Employee Search</h1>
+    <p class="sub">Search by letter/name + optional age range 💗</p>
 
-    <div class="row">
-      <label for="nameQuery">Search by name:</label>
-      <input id="nameQuery" type="text" placeholder="e.g. C" />
-      <button id="queryByName" data-querytype="by_name">Query</button>
-      <button id="showAll" data-querytype="all">Show All</button>
+    <div class="panel">
+      <div class="row">
+        <div class="field">
+          <label for="nameQuery">Name contains</label>
+          <input id="nameQuery" type="text" placeholder="e.g. C" />
+        </div>
+
+        <div class="field">
+          <label for="minAge">Min age</label>
+          <input id="minAge" type="number" placeholder="e.g. 20" />
+        </div>
+
+        <div class="field">
+          <label for="maxAge">Max age</label>
+          <input id="maxAge" type="number" placeholder="e.g. 40" />
+        </div>
+      </div>
+
+      <div class="row buttons">
+        <button id="searchBtn">Search</button>
+        <button id="showAllBtn" class="secondary">Show All</button>
+      </div>
+
+      <div class="status" id="status">API: checking…</div>
     </div>
-
-    <div class="status" id="status">API: checking…</div>
 
     <div id="results"></div>
   </div>
 
-  <script id="show_results_view" type="text/x-handlebars-template">
+  <script id="results_template" type="text/x-handlebars-template">
+    <div class="resultsHeader">
+      <div class="count">{{employees.length}} result(s)</div>
+    </div>
+
     <ul class="list">
       {{#if employees.length}}
         {{#each employees}}
           <li class="item">
-            <strong>id:</strong> {{this.id}}
-            <span class="sep">|</span>
-            <strong>name:</strong> {{this.employee_name}}
-            <span class="sep">|</span>
-            <strong>salary:</strong> ${{this.employee_salary}}
-            <span class="sep">|</span>
-            <strong>age:</strong> {{this.employee_age}}
+            <div class="itemTop">
+              <span class="badge">id {{this.id}}</span>
+              <span class="name">{{this.employee_name}}</span>
+            </div>
+            <div class="itemBottom">
+              <span>💰 ${{this.employee_salary}}</span>
+              <span>🎂 {{this.employee_age}}</span>
+            </div>
           </li>
         {{/each}}
       {{else}}
