@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-
+const employees = [
 { id: 1, employee_name: "Jessica Koo", employee_salary: 86000, employee_age: 66 },
   { id: 2, employee_name: "Rachel Lee", employee_salary: 433060, employee_age: 22 },
   { id: 3, employee_name: "Kaitlyn Hu", employee_salary: 137500, employee_age: 59 },
